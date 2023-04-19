@@ -1,7 +1,16 @@
-const express = require("express")
+const express = require("express");
 
-const server = express()
+const server = express();
+server.use(express.json());
 
-// SİHRİNİZİ GÖSTERİN
+const carsRouter = require("./cars/cars-router");
+server.use("/api/cars", carsRouter);
 
-module.exports = server
+server.get("/", (req, res) => {
+  res.status(200).json({
+    statusCode: 200,
+    message: "Server is up and ruuning!",
+  });
+});
+
+module.exports = server;
